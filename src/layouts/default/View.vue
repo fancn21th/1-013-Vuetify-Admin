@@ -13,15 +13,11 @@
         <v-list density="compact" nav>
           <v-list-item
             prepend-icon="mdi-view-dashboard"
-            title="Home"
-            value="home"
-            href="/"
-          ></v-list-item>
-          <v-list-item
-            prepend-icon="mdi-forum"
-            title="About"
-            value="about"
-            href="/about"
+            v-for="route in staticRoutes"
+            :key="route.title"
+            :title="route.title"
+            :value="route.title"
+            :href="route.url"
           ></v-list-item>
         </v-list>
       </v-navigation-drawer>
@@ -47,5 +43,6 @@
 </template>
 
 <script setup>
-//
+import { staticRoutes } from "@/config/router.config";
+console.log({ staticRoutes });
 </script>
