@@ -36,10 +36,11 @@
       </v-app-bar>
 
       <!-- main -->
-      <v-main style="height: 550px">
+      <v-main>
         <router-view />
-      </v-main> </v-layout
-  ></v-card>
+      </v-main>
+    </v-layout>
+  </v-card>
 </template>
 
 <script setup>
