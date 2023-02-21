@@ -4,8 +4,8 @@
       <!-- drawer -->
       <v-navigation-drawer permanent>
         <v-list-item
-          prepend-avatar="https://randomuser.me/api/portraits/men/78.jpg"
-          title="John Leider"
+          prepend-avatar="https://randomuser.me/api/portraits/men/2.jpg"
+          title="Micheal Han"
         ></v-list-item>
 
         <v-divider></v-divider>
@@ -15,11 +15,13 @@
             prepend-icon="mdi-view-dashboard"
             title="Home"
             value="home"
+            href="/"
           ></v-list-item>
           <v-list-item
             prepend-icon="mdi-forum"
             title="About"
             value="about"
+            href="/about"
           ></v-list-item>
         </v-list>
       </v-navigation-drawer>
