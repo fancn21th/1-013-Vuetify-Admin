@@ -39,8 +39,20 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <!-- third row -->
+    <v-row>
+      <v-col cols="6">
+        <v-card>
+          <v-card-text>
+            <LineChart />
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
 <script setup>
+import LineChart from "@/components/LineChart";
 </script>

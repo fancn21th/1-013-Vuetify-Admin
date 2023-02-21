@@ -8,6 +8,7 @@
     "lint": "eslint . --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@antv/g2plot": "2.4.25",
     "@mdi/font": "7.0.96",
     "pinia": "^2.0.23",
     "roboto-fontface": "*",
