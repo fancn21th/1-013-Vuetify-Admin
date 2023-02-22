@@ -17,7 +17,7 @@
             :key="route.title"
             :title="route.title"
             :value="route.title"
-            :href="route.url"
+            :href="route.path"
           ></v-list-item>
         </v-list>
       </v-navigation-drawer>
