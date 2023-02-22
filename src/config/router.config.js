@@ -1,5 +1,6 @@
 import { routes } from "@/router";
 
+// example:
 // export const staticRoutes = [
 //   {
 //     title: `Home`,
@@ -12,7 +13,19 @@ import { routes } from "@/router";
 // ];
 
 //  generate staticRoutes based on routes
-export const staticRoutes = routes[0].children.map(({ path, name }) => ({
-  path,
-  title: name,
-}));
+//  the level of routes is predefined as two
+//  the children of first level route will be put into the tabs
+const appRoute = routes[0];
+
+export const staticRoutes = appRoute.children.map(
+  ({ path, name, children }) => ({
+    path,
+    title: name,
+    children: children
+      ? children.map((child) => ({
+          path: child.path,
+          title: child.name,
+        }))
+      : [],
+  })
+);

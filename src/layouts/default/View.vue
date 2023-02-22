@@ -3,11 +3,13 @@
     <v-layout>
       <!-- drawer -->
       <v-navigation-drawer permanent>
-        <v-list-item title="产品名称" :prepend-avatar="logo"> </v-list-item>
+        <v-list-item title="产品名称" :prepend-avatar="logo" class="mt-6">
+        </v-list-item>
 
-        <v-divider></v-divider>
+        <v-divider class="mt-10"></v-divider>
 
         <v-list density="compact" nav>
+          <!-- first level navigation -->
           <v-list-item
             prepend-icon="mdi-view-dashboard"
             v-for="route in staticRoutes"
@@ -22,7 +24,7 @@
       <!-- app bar -->
       <v-app-bar prominent extended>
         <template v-slot:prepend>
-          <v-breadcrumbs :items="items">
+          <v-breadcrumbs :items="breadcrumbsItems">
             <template v-slot:prepend>
               <v-icon size="small" icon="mdi-vuetify"></v-icon>
             </template>
@@ -40,9 +42,16 @@
         </template>
 
         <template v-slot:extension>
+          <!-- sub navigation -->
+          <!-- todo: remove color -->
           <v-tabs v-model="tab" align-tabs="title" color="deep-purple-accent-4">
-            <v-tab v-for="item in tabItems" :key="item" :value="item">
-              {{ item }}
+            <v-tab
+              v-for="item in tabItems"
+              :key="item.title"
+              :value="item.title"
+              :href="item.path"
+            >
+              {{ item.title }}
             </v-tab>
           </v-tabs>
         </template>
@@ -57,6 +66,7 @@
 </template>
 
 <script setup>
+import { useRoute } from "vue-router";
 import { staticRoutes } from "@/config/router.config";
 import { useTheme } from "vuetify";
 import logo from "@/assets/logo.png";
@@ -68,25 +78,40 @@ const toggleTheme = () =>
     ? "light"
     : "dark");
 
-const items = [
-  {
-    title: "Dashboard",
-    disabled: false,
-    href: "breadcrumbs_dashboard",
-  },
-  {
-    title: "Link 1",
-    disabled: false,
-    href: "breadcrumbs_link_1",
-  },
-  {
-    title: "Link 2",
-    disabled: true,
-    href: "breadcrumbs_link_2",
-  },
-];
+// example:
+// const breadcrumbsItems = [
+//   {
+//     title: "Dashboard",
+//     disabled: false,
+//     href: "breadcrumbs_dashboard",
+//   },
+//   {
+//     title: "Link 1",
+//     disabled: false,
+//     href: "breadcrumbs_link_1",
+//   },
+//   {
+//     title: "Link 2",
+//     disabled: true,
+//     href: "breadcrumbs_link_2",
+//   },
+// ];
 
 const tab = null;
 
-const tabItems = ["web", "shopping", "videos", "images", "news"];
+const route = useRoute();
+
+const subRoutes = staticRoutes.find((item) => route.path.startsWith(item.path));
+
+const tabItems = subRoutes.children.map((subRoute) => ({
+  title: subRoute.title,
+  path: subRoute.path,
+}));
+
+console.log({ tabItems });
+
+const breadcrumbsItems = route.path.split("/").map((item) => ({
+  title: item,
+  disabled: false,
+}));
 </script>
