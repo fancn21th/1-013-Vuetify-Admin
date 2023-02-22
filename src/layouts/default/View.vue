@@ -28,7 +28,11 @@
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
         </template>
 
-        <v-app-bar-title>Photos</v-app-bar-title>
+        <v-app-bar-title>Admin</v-app-bar-title>
+
+        <v-btn icon @click="toggleTheme">
+          <v-icon>mdi-theme-light-dark</v-icon>
+        </v-btn>
 
         <template v-slot:append>
           <v-btn icon="mdi-dots-vertical"></v-btn>
@@ -45,5 +49,12 @@
 
 <script setup>
 import { staticRoutes } from "@/config/router.config";
-console.log({ staticRoutes });
+import { useTheme } from "vuetify";
+
+const theme = useTheme();
+
+const toggleTheme = () =>
+  (theme.global.name.value = theme.global.current.value.dark
+    ? "light"
+    : "dark");
 </script>
